@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Items in Category: {{$ctrl.items.category.name}}</h2>
+  <a ui-sref="categories">&lt;&lt; Back to Categories</a>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="item in $ctrl.items.menu_items">
+      <strong>{{ item.name }}</strong> - {{ item.description }}
+      <span class="label label-success pull-right">{{ item.price_large | currency }}</span>
+    </li>
+  </ul>
+</div>
