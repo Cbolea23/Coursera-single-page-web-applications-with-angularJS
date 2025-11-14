@@ -53,13 +53,20 @@ function MenuSearchService($http, ApiBasePath) {
             url: (ApiBasePath + "/menu_items.json")
         }).then(function (result) {
             var foundItems = [];
-            var menuItems = result.data.menu_items;
+            var categories = result.data;
 
-            for (var i = 0; i < menuItems.length; i++) {
-                if (menuItems[i].description.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    foundItems.push(menuItems[i]);
+            for (var categoryKey in categories) {
+                if (categories[categoryKey] && categories[categoryKey].menu_items) {
+                    var menuItems = categories[categoryKey].menu_items;
+
+                    for (var i = 0; i < menuItems.length; i++) {
+                        if (menuItems[i].description.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            foundItems.push(menuItems[i]);
+                        }
+                    }
                 }
             }
+            
             return foundItems;
         });
     };
