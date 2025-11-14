@@ -1,0 +1,65 @@
+<div class="container">
+  <h2 class="text-center">Sign Up for our Newsletter!</h2>
+
+  <form name="regForm" novalidate>
+
+    <div class="form-group" ng-class="{ 'has-error': regForm.firstname.$invalid && regForm.firstname.$touched }">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" name="firstname"
+        ng-model="signUpCtrl.user.firstname" required>
+      <span class="help-block" ng-if="regForm.firstname.$invalid && regForm.firstname.$touched">
+        First name is required.
+      </span>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': regForm.lastname.$invalid && regForm.lastname.$touched }">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" name="lastname"
+        ng-model="signUpCtrl.user.lastname" required>
+      <span class="help-block" ng-if="regForm.lastname.$invalid && regForm.lastname.$touched">
+        Last name is required.
+      </span>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': regForm.email.$invalid && regForm.email.$touched }">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email"
+        ng-model="signUpCtrl.user.email" required>
+      <span class="help-block" ng-if="regForm.email.$invalid && regForm.email.$touched">
+        Must be a valid email address: handle@domain format.
+      </span>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': regForm.phone.$invalid && regForm.phone.$touched }">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" name="phone"
+        ng-model="signUpCtrl.user.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})">
+      <span class="help-block" ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+        Phone must be in the format ###-###-####.
+      </span>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': signUpCtrl.favoriteDishInvalid }">
+      <label for="favoriteDish">Favorite Menu Item (e.g., L1)</label>
+      <input type="text" class="form-control" name="favoriteDish"
+        ng-model="signUpCtrl.user.favoriteDish"
+        ng-change="signUpCtrl.validateFavoriteDish()"
+        required>
+      <span class="help-block" ng-if="signUpCtrl.favoriteDishInvalid">
+        No such menu number exists.
+      </span>
+    </div>
+
+    <button class="btn btn-primary"
+      ng-disabled="regForm.$invalid"
+      ng-click="signUpCtrl.submit()">
+      Submit
+    </button>
+    
+    <div class="alert alert-success" ng-if="signUpCtrl.saved">
+      Your information has been saved.
+    </div>
+
+  </form>
+</div>
